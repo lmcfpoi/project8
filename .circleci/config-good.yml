@@ -9,7 +9,6 @@ jobs:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      #- checkout
       - run: mkdir -p workspace
       - run: echo  "HELLLLLOOOOO WWWWOOOOOOORRRRLLLLLLD" > output.txt
       - persist_to_workspace:
