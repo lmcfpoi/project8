@@ -1,6 +1,12 @@
 version: 2.1
 
+<<<<<<< Updated upstream
 #workflows xxxuuuuuuxxx:
+||||||| constructed merge base
+#workflows xxxxxx:
+=======
+#workflows xxxyyyyyxxx:
+>>>>>>> Stashed changes
 jobs:
   save_hello_world_output:
     docker:
