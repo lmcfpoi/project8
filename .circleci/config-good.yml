@@ -1,0 +1,39 @@
+version: 2.1
+
+#workflows:
+jobs:
+  save_hello_world_output:
+    docker:
+      - image: cimg/base:2020.01
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      #- checkout
+      - run: mkdir -p workspace
+      - run: echo  "HELLLLLOOOOO WWWWOOOOOOORRRRLLLLLLD" > output.txt
+      - persist_to_workspace:
+          root: myworkspace
+          paths:
+            - output.txt
+
+  print_output_file:
+    docker:
+      - image: cimg/base:2020.01
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - attach_workspace:
+          root: myworkspace
+          paths:
+            - output.txt
+      - run: cat output.txt
+
+workflows:
+  myworkflow:
+    jobs:
+      - save_hello_world_output
+      - print_output_file:
+        requires:
+        - save_hello_world_output
